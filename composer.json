@@ -34,6 +34,11 @@
         "check-style": "phpcs -p --standard=PSR2 src/ -v",
         "fix-style": "phpcbf -p --standard=PSR2 src/ -v"
     },
+    "config": {
+        "allow-plugins": {
+            "*": true
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
