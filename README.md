@@ -7,8 +7,8 @@
     <a href="https://github.com/hughcube-php/laravel-service-support/actions?query=workflow%3ALint">
         <img src="https://github.com/hughcube-php/laravel-service-support/workflows/Lint/badge.svg" alt="Lint Actions status">
     </a>
-    <a href="https://styleci.io/repos/506073336">
-        <img src="https://github.styleci.io/repos/506073336/shield?branch=master" alt="StyleCI">
+    <a href="https://styleci.io/repos/388451724">
+        <img src="https://github.styleci.io/repos/388451724/shield?branch=master" alt="StyleCI">
     </a>
 </p>
 
@@ -16,12 +16,6 @@
 
 ```shell
 $ composer require hughcube/laravel-service-support -vvv
-```
-
-## Configuration
-
-```shell
-$ php artisan vendor:publish --provider="HughCube\Laravel\ServiceSupport\ServiceProvider"
 ```
 
 ## Usage

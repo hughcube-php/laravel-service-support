@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=7.2|8.*"
+        "php": ">=7.0"
     },
     "require-dev": {
         "laravel/framework": "*",
@@ -26,13 +26,6 @@
     "autoload-dev": {
         "psr-4": {
             "HughCube\\Laravel\\ServiceSupport\\Tests\\": "tests"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "HughCube\\Laravel\\ServiceSupport\\ServiceProvider"
-            ]
         }
     },
     "scripts": {
