@@ -17,12 +17,12 @@ use InvalidArgumentException;
 
 /**
  * @property callable|ContainerContract|null $container
- * @property callable|Repository|null        $config
+ * @property callable|Repository|null $config
  */
 abstract class Manager extends IlluminateManager
 {
     /**
-     * @param callable|ContainerContract|null $container
+     * @param  callable|ContainerContract|null  $container
      */
     public function __construct($container = null)
     {
@@ -40,7 +40,7 @@ abstract class Manager extends IlluminateManager
     /**
      * Call a custom driver creator.
      *
-     * @param string $driver
+     * @param  string  $driver
      *
      * @return mixed
      */
@@ -66,11 +66,11 @@ abstract class Manager extends IlluminateManager
     }
 
     /**
-     * @throws
-     *
      * @return Repository
      *
      * @phpstan-ignore-next-line
+     * @throws
+     *
      */
     protected function getContainerConfig(): Repository
     {
@@ -86,8 +86,8 @@ abstract class Manager extends IlluminateManager
     }
 
     /**
-     * @param null|string|int $name
-     * @param mixed           $default
+     * @param  null|string|int  $name
+     * @param  mixed  $default
      *
      * @return array|mixed
      */
@@ -101,11 +101,11 @@ abstract class Manager extends IlluminateManager
     /**
      * Get the configuration for a client.
      *
-     * @param string $name
-     *
-     * @throws InvalidArgumentException
+     * @param  string  $name
      *
      * @return array
+     * @throws InvalidArgumentException
+     *
      */
     protected function configuration(string $name): array
     {
@@ -113,7 +113,7 @@ abstract class Manager extends IlluminateManager
         $config = $this->getPackageConfig("clients.$name");
 
         if (null === $config) {
-            throw new InvalidArgumentException("client [{$name}] not configured.");
+            throw new InvalidArgumentException(sprintf("%s client [{$name}] not configured.", $this->getFacadeAccessor()));
         }
 
         return array_merge($this->getClientDefaultConfig(), $config);

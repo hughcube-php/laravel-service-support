@@ -8,13 +8,27 @@
 
 namespace HughCube\Laravel\ServiceSupport;
 
-use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
-use Laravel\Lumen\Application as LumenApplication;
 
 abstract class ServiceProvider extends IlluminateServiceProvider
 {
+    /**
+     * Register the provider.
+     */
+    public function register()
+    {
+        $this->app->singleton($this->getFacadeAccessor(), function ($app) {
+            return $this->createManager($app);
+        });
+    }
+
     abstract protected function getFacadeAccessor();
+
+    /**
+     * @param $app
+     * @return mixed
+     */
+    abstract protected function createManager($app);
 
 //    /**
 //     * register the provider config.
