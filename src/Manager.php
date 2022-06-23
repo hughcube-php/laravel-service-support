@@ -17,12 +17,12 @@ use InvalidArgumentException;
 
 /**
  * @property callable|ContainerContract|null $container
- * @property callable|Repository|null $config
+ * @property callable|Repository|null        $config
  */
 abstract class Manager extends IlluminateManager
 {
     /**
-     * @param  callable|ContainerContract|null  $container
+     * @param callable|ContainerContract|null $container
      */
     public function __construct($container = null)
     {
@@ -40,7 +40,7 @@ abstract class Manager extends IlluminateManager
     /**
      * Call a custom driver creator.
      *
-     * @param  string  $driver
+     * @param string $driver
      *
      * @return mixed
      */
@@ -66,11 +66,11 @@ abstract class Manager extends IlluminateManager
     }
 
     /**
+     * @throws
+     *
      * @return Repository
      *
      * @phpstan-ignore-next-line
-     * @throws
-     *
      */
     protected function getContainerConfig(): Repository
     {
@@ -86,8 +86,8 @@ abstract class Manager extends IlluminateManager
     }
 
     /**
-     * @param  null|string|int  $name
-     * @param  mixed  $default
+     * @param null|string|int $name
+     * @param mixed           $default
      *
      * @return array|mixed
      */
@@ -101,20 +101,22 @@ abstract class Manager extends IlluminateManager
     /**
      * Get the configuration for a client.
      *
-     * @param  string  $name
+     * @param string $name
      *
-     * @return array
      * @throws InvalidArgumentException
      *
+     * @return array
      */
     protected function configuration(string $name): array
     {
         $name = $name ?: $this->getDefaultDriver();
-        $config = $this->getPackageConfig(sprintf("%s.%s", $this->getDriversConfigKey(), $name));
+        $config = $this->getPackageConfig(sprintf('%s.%s', $this->getDriversConfigKey(), $name));
 
         if (null === $config) {
             throw new InvalidArgumentException(sprintf(
-                "%s %s[{$name}] not configured.", $this->getPackageFacadeAccessor(), $this->getDriversConfigKey()
+                "%s %s[{$name}] not configured.",
+                $this->getPackageFacadeAccessor(),
+                $this->getDriversConfigKey()
             ));
         }
 

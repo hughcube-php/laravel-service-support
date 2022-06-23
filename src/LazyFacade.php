@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Facade as IlluminateFacade;
 abstract class LazyFacade extends IlluminateFacade
 {
     /**
-     * @param  Application|mixed  $app
+     * @param Application|mixed $app
      *
      * @return void
      */
@@ -25,7 +25,7 @@ abstract class LazyFacade extends IlluminateFacade
     /**
      * Resolve the facade root instance from the container.
      *
-     * @param  object|string  $name
+     * @param object|string $name
      *
      * @return mixed
      */

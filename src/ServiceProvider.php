@@ -37,6 +37,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
 
     /**
      * @param $app
+     *
      * @return mixed
      */
     abstract protected function createPackageFacadeRoot($app);
