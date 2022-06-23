@@ -93,7 +93,7 @@ abstract class Manager extends IlluminateManager
      */
     protected function getPackageConfig($name = null, $default = null)
     {
-        $key = sprintf('%s%s', $this->getFacadeAccessor(), (null === $name ? '' : ".$name"));
+        $key = sprintf('%s%s', $this->getPackageFacadeAccessor(), (null === $name ? '' : ".$name"));
 
         return $this->getContainerConfig()->get($key, $default);
     }
@@ -113,7 +113,7 @@ abstract class Manager extends IlluminateManager
         $config = $this->getPackageConfig("clients.$name");
 
         if (null === $config) {
-            throw new InvalidArgumentException(sprintf("%s client [{$name}] not configured.", $this->getFacadeAccessor()));
+            throw new InvalidArgumentException(sprintf("%s client [{$name}] not configured.", $this->getPackageFacadeAccessor()));
         }
 
         return array_merge($this->getClientDefaultConfig(), $config);
@@ -132,7 +132,7 @@ abstract class Manager extends IlluminateManager
      */
     protected function createDriver($driver)
     {
-        return $this->makeDriver($this->configuration($driver));
+        return $this->makeClient($this->configuration($driver));
     }
 
     /**
@@ -143,7 +143,12 @@ abstract class Manager extends IlluminateManager
         return $this->getPackageConfig('defaults', []);
     }
 
-    abstract protected function makeDriver(array $config);
+    public function client($driver = null)
+    {
+        return $this->driver($driver);
+    }
 
-    abstract protected function getFacadeAccessor();
+    abstract protected function makeClient(array $config);
+
+    abstract protected function getPackageFacadeAccessor();
 }

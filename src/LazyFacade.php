@@ -8,26 +8,24 @@
 
 namespace HughCube\Laravel\ServiceSupport;
 
-use BadMethodCallException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Facade as IlluminateFacade;
 
 abstract class LazyFacade extends IlluminateFacade
 {
     /**
-     * @param Application|mixed $app
+     * @param  Application|mixed  $app
      *
      * @return void
      */
     protected static function registerServiceProvider($app)
     {
-        throw new BadMethodCallException('The implementation is required to register a service!');
     }
 
     /**
      * Resolve the facade root instance from the container.
      *
-     * @param object|string $name
+     * @param  object|string  $name
      *
      * @return mixed
      */

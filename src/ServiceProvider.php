@@ -19,7 +19,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
     public function boot()
     {
         if ($this->app instanceof LumenApplication) {
-            $this->app->configure($this->getFacadeAccessor());
+            $this->app->configure($this->getPackageFacadeAccessor());
         }
     }
 
@@ -28,18 +28,18 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     public function register()
     {
-        $this->app->singleton($this->getFacadeAccessor(), function ($app) {
-            return $this->createFacadeRoot($app);
+        $this->app->singleton($this->getPackageFacadeAccessor(), function ($app) {
+            return $this->createPackageFacadeRoot($app);
         });
     }
 
-    abstract protected function getFacadeAccessor();
+    abstract protected function getPackageFacadeAccessor();
 
     /**
      * @param $app
      * @return mixed
      */
-    abstract protected function createFacadeRoot($app);
+    abstract protected function createPackageFacadeRoot($app);
 
 //    /**
 //     * register the provider config.
