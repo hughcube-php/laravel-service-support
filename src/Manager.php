@@ -150,7 +150,7 @@ abstract class Manager extends IlluminateManager
         return $this->driver($driver);
     }
 
-    public function getDriversConfigKey(): string
+    protected function getDriversConfigKey(): string
     {
         return 'drivers';
     }
