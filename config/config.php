@@ -8,7 +8,7 @@ return [
      */
     'defaults' => [],
 
-    'clients' => [
+    'drivers' => [
         'default' => [],
     ],
 ];

@@ -98,11 +98,6 @@ abstract class Manager extends IlluminateManager
         return $this->getContainerConfig()->get($key, $default);
     }
 
-    public function getClientsConfigKey(): string
-    {
-        return 'clients';
-    }
-
     /**
      * Get the configuration for a client.
      *
@@ -115,15 +110,15 @@ abstract class Manager extends IlluminateManager
     protected function configuration(string $name): array
     {
         $name = $name ?: $this->getDefaultDriver();
-        $config = $this->getPackageConfig(sprintf("%s.%s", $this->getClientsConfigKey(), $name));
+        $config = $this->getPackageConfig(sprintf("%s.%s", $this->getDriversConfigKey(), $name));
 
         if (null === $config) {
             throw new InvalidArgumentException(sprintf(
-                "%s %s[{$name}] not configured.", $this->getPackageFacadeAccessor(), $this->getClientsConfigKey()
+                "%s %s[{$name}] not configured.", $this->getPackageFacadeAccessor(), $this->getDriversConfigKey()
             ));
         }
 
-        return array_merge($this->getClientDefaultConfig(), $config);
+        return array_merge($this->getDriverDefaultConfig(), $config);
     }
 
     /**
@@ -139,13 +134,13 @@ abstract class Manager extends IlluminateManager
      */
     protected function createDriver($driver)
     {
-        return $this->makeClient($this->configuration($driver));
+        return $this->makeDriver($this->configuration($driver));
     }
 
     /**
      * @return array
      */
-    protected function getClientDefaultConfig(): array
+    protected function getDriverDefaultConfig(): array
     {
         return $this->getPackageConfig('defaults', []);
     }
@@ -155,7 +150,12 @@ abstract class Manager extends IlluminateManager
         return $this->driver($driver);
     }
 
-    abstract protected function makeClient(array $config);
+    public function getDriversConfigKey(): string
+    {
+        return 'drivers';
+    }
+
+    abstract protected function makeDriver(array $config);
 
     abstract protected function getPackageFacadeAccessor();
 }
