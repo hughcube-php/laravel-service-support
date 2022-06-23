@@ -98,6 +98,11 @@ abstract class Manager extends IlluminateManager
         return $this->getContainerConfig()->get($key, $default);
     }
 
+    public function getClientsConfigKey(): string
+    {
+        return 'clients';
+    }
+
     /**
      * Get the configuration for a client.
      *
@@ -110,10 +115,12 @@ abstract class Manager extends IlluminateManager
     protected function configuration(string $name): array
     {
         $name = $name ?: $this->getDefaultDriver();
-        $config = $this->getPackageConfig("clients.$name");
+        $config = $this->getPackageConfig(sprintf("%s.%s", $this->getClientsConfigKey(), $name));
 
         if (null === $config) {
-            throw new InvalidArgumentException(sprintf("%s client [{$name}] not configured.", $this->getPackageFacadeAccessor()));
+            throw new InvalidArgumentException(sprintf(
+                "%s %s[{$name}] not configured.", $this->getPackageFacadeAccessor(), $this->getClientsConfigKey()
+            ));
         }
 
         return array_merge($this->getClientDefaultConfig(), $config);
