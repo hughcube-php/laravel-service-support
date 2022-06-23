@@ -18,7 +18,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
     public function register()
     {
         $this->app->singleton($this->getFacadeAccessor(), function ($app) {
-            return $this->createManager($app);
+            return $this->createFacadeRoot($app);
         });
     }
 
@@ -28,7 +28,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      * @param $app
      * @return mixed
      */
-    abstract protected function createManager($app);
+    abstract protected function createFacadeRoot($app);
 
 //    /**
 //     * register the provider config.
